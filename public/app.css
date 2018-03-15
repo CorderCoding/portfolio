@@ -1,0 +1,38 @@
+#nav {
+  margin-top: 15px;
+}
+
+.ui.inverted.segment {
+  min-width: 100%;
+}
+
+.ui.inverted.segment .ui.header {
+  margin-bottom: 50px;
+}
+
+.green-char {
+  color: #21ba45;
+}
+
+.black-char {
+  color: black;
+  font-weight: bold;
+}
+
+#landing-items {
+  margin: 30px 0;
+}
+
+#about-items {
+  margin: 50px 0;
+}
+
+.ui.large.form {
+  max-width: 30%;
+  margin: 15% auto 15% auto;
+}
+
+.ui.link.cards {
+  max-width: 60%;
+  margin: 0 auto;
+}

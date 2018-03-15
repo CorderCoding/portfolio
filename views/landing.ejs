@@ -1,5 +1,51 @@
 <% include ./partials/header %>
-
-<h1>WELCOME TO MY PORTFOLIO PAGE</h1>
+     
+    <div class="ui inverted vertical center aligned segment">
+        <% include ./partials/nav %>
+        <div class="ui header">
+          <h1>
+            <span class="green-char">&lt</span>Corder<span class="green-char">|</span>Coding<span class="green-char">&gt</span>
+          </h1>
+          <h2>My portfolio and blog site, built by me, from scratch, while I blog about it and any other projects I decide.</h2>
+          <a class="ui huge green button" href="/portfolio">My Portfolio<i class="right arrow icon"></i></a>
+         </div>
+    </div>
+<div id="landing-items" class="ui container">
+    <div class="ui divided items">
+        <div class="item">
+            <div class="image">
+                <img src="/images.png">
+            </div>
+            <div class="middle aligned content">
+                <a class="header" href="/about">About Me</a>
+                    <div class="description">
+                        <span>I am a "self-taught" developer hoping to have a career in the industry.</span>
+                    </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="image">
+                <img src="https://c1.staticflickr.com/5/4750/25220289317_3e0dd64842_b.jpg">
+            </div>
+            <div class="middle aligned content">
+                <a class="header" href="/portfolio">Portfolio</a>
+                <div class="description">
+                    <span>My portfolio contains my projects. Working versions and links to github.</span>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="rounded image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQebPFahkpmq1JiGiVcT38OsmEnmd2cBmkHj-Bv0Sxoh5zGRkt5Dg">
+            </div>
+            <div class="middle aligned content">
+                <a class="header" href="/blog">Blog</a>
+                <div class="description">
+                    <span>Where I (hopefully) write about the things I'm working on or share my thoughts. Usually on subjects technology related.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <% include ./partials/footer %>

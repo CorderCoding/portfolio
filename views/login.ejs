@@ -1,11 +1,14 @@
 <% include ./partials/header %>
+
+<div class="ui inverted vertical center aligned segment">
+<% include ./partials/nav %>
 <div class="ui header">
 <h1>Login</h1>
 <h2>Login to leave comments on my blog posts.</h2>
 </div>
 </div>
 <div class="ui container">
-    <form class="ui large form" action="/login" method="POST">
+    <form id="form" class="ui large form" action="/login" method="POST">
         <div class="field">
             <label>Username:</label>
             <input type="text" name="username" placeholder="Username"></input>

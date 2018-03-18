@@ -8,7 +8,7 @@ var postSchema = new Schema({
     	id: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     	username: String
     },
-    date: {type: String, default: new Date().toString()},
+    date: {type: String, default: new Date().toDateString()},
     comments: [{type: mongoose.Schema.Types.ObjectId, ref: "Comment"}]
 });
 

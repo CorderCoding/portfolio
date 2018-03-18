@@ -20,7 +20,7 @@
     </div>
     <p>Author: <%= post.author.username%> </p>
     <div class="ui post-body content">
-      <p><%= post.body %></p>
+      <p class="text wrap"><%= post.body %></p>
       <p><%= post.date%></p>
       <% if (currentUser) { %>
         <form class="ui form" action="/blog/<%=post.id%>/comment/<%=comment.id%>?_method=PUT" method="POST">

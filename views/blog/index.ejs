@@ -19,15 +19,16 @@
 </div>
       <div class="ui text container segment">
         <div class="ui items">
-        <% posts.forEach(function(post) { %>
+        <% posts.reverse().forEach(function(post) { %>
           <div class="item segment">
             <div class="content">
-              <a class="header" href="/blog/<%=post.id%>"><%= post.title %></a>
+              <a class="header" href="/blog/<%=post.id%>"><%- post.title %></a>
               <p class="meta">Author: <%= post.author.username%> </p>
               <div class="description">
-                <p><%= post.body.substring(0,150) %>...</p>
-                <p><%= post.date%></p>
+                <p class="text wrap"><%- post.body.substring(0,85) %>...</p>
+                <p><%= post.date %></p>
               </div>
+              <div class="ui divider"></div>
             </div>
           </div>
         <% }); %>

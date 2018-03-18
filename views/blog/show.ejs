@@ -18,16 +18,16 @@
     <div>
       <% if(currentUser && post.author.id.equals(currentUser._id)) { %>
         <form action="/blog/delete/<%= post.id %>?_method=DELETE" method="POST">
-          <a class="ui large yellow button" href="/blog/edit/<%= post.id %>">Edit Post</a>
-          <button class="ui large red button">Delete Post</button>
+          <a class="ui small yellow button" href="/blog/edit/<%= post.id %>">Edit Post</a>
+          <button class="ui small red button">Delete Post</button>
         </form>
       <% } %>
       </div>
-      <h1 class="header"><%= post.title %></h1>
+      <h1 class="header"><%- post.title %></h1>
     
       <h3 class="meta">Author: <%= post.author.username%> </h3>
       <div class="ui divider"></div>
-      <p class="text wrap"><%= post.body %></p>
+      <p class="text wrap"><%- post.body %></p>
       <div class="ui divider"></div>
       <p><%= post.date%></p>
       <% if (currentUser) { %>
@@ -35,7 +35,7 @@
         <form class="ui form" action="/blog/<%=post.id%>/comment" method="POST">
           <textarea name="comment" placeholder="Comment..."></textarea>
           <div class="ui divider"></div>
-          <button class="ui large green button">Publish Comment</button>
+          <button class="ui small green button">Publish Comment</button>
         </form>
       <% } %>
       <div class="ui comments">
@@ -44,7 +44,7 @@
           <div class="content">
             <div class="author">
               <p>Comment by: <%=comment.author.username%></p>
-              <p class="metadata"><span class="date"><%=comment.date%></span></p>
+              <p class="metadata date"><%=comment.date%></p>
             </div>
             <div class="text">
               <p><%=comment.body%></p>
@@ -52,8 +52,8 @@
           
             <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)) { %>
               <form action="/blog/<%= post.id %>/comment/<%=comment.id%>/delete?_method=DELETE" method="POST">
-                <a class="ui large yellow button" href="/blog/<%= post.id %>/comment/<%=comment.id%>/edit">Edit Comment</a>
-                <button class="ui large red button">Delete Comment</button>
+                <a class="ui small yellow button" href="/blog/<%= post.id %>/comment/<%=comment.id%>/edit">Edit Comment</a>
+                <button class="ui small red button">Delete Comment</button>
               </form>
             <% } %>
             </div>

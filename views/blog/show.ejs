@@ -16,7 +16,7 @@
   </div>
   <div class="ui text container segment">
     <div>
-      <% if(currentUser && post.author.id.equals(currentUser._id)) { %>
+      <% if(currentUser && post.author.id.equals(currentUser._id) || (currentUser && currentUser.isAdmin)) { %>
         <form action="/blog/delete/<%= post.id %>?_method=DELETE" method="POST">
           <a class="ui small yellow button" href="/blog/edit/<%= post.id %>">Edit Post</a>
           <button class="ui small red button">Delete Post</button>

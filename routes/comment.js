@@ -14,7 +14,8 @@ router.post("/", function(req, res) {
         if(err) {
           console.log(err);
         } else {
-          Comment.create({body: req.body.comment}, function(err, comment) {
+          var sanitized = req.sanitize(req.body.comment);
+          Comment.create({body: sanitized}, function(err, comment) {
             if(err) {
               console.log(err);
             } else {
@@ -54,7 +55,8 @@ router.get("/:comment_id/edit", function(req, res) {
 
 //UPDATE COMMENT
 router.put("/:comment_id", function(req, res) {
-  Comment.findByIdAndUpdate(req.params.comment_id, {$set: {"body":req.body.comment}}, function(err, comment) {
+  var sanitized = req.sanitize(req.body.comment);
+  Comment.findByIdAndUpdate(req.params.comment_id, {$set: {"body":sanitized}}, function(err, comment) {
     if(err) {
       console.log(err);
     } else{

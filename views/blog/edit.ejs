@@ -4,10 +4,11 @@
   <% include ../partials/nav %>
   <div class="ui header">
   <h1>Editing Post</h1>
+  <h2>Make changes to your post below.</h2>
   </div>
   </div>
   <div class="ui container">
-    <form id="form" class="ui large form" action="/blog/edit/<%=post.id%>?_method=PUT" method="POST">
+    <form id="blog-form" class="ui large form" action="/blog/edit/<%=post.id%>?_method=PUT" method="POST">
       <div class="field">
         <label>Title:</label>
         <input type="text" value="<%= post.title %>" name="post[title]">

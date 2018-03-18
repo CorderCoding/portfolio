@@ -10,6 +10,10 @@
   margin-bottom: 50px;
 }
 
+h1 {
+  font-size: 54px;
+}
+
 .green-char {
   color: #21ba45;
 }
@@ -27,12 +31,27 @@
   margin: 50px 0;
 }
 
-#form {
+#log-form {
   max-width: 30%;
   margin: 10% auto 15% auto;
+  font-size: 24px;
+}
+
+#blog-form {
+  max-width: 65%;
+  margin: 5% auto;
+  font-size: 24px;
 }
 
 .ui.link.cards {
   max-width: 60%;
   margin: 0 auto;
+}
+
+.wrap { 
+   white-space: pre-wrap;      /* CSS3 */   
+   white-space: -moz-pre-wrap; /* Firefox */    
+   white-space: -pre-wrap;     /* Opera <7 */   
+   white-space: -o-pre-wrap;   /* Opera 7 */    
+   word-wrap: break-word;      /* IE */
 }

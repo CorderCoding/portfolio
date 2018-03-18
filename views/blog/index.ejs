@@ -1,41 +1,40 @@
 <% include ../partials/header %>
-      <div class="ui inverted vertical center aligned segment">
-        <% include ../partials/nav %>
-        <div class="ui header">
-          <h1>Blog</h1>
-          <h2>Welcome to my cluttered mind.</h2>
-          <% if(!currentUser) { %>
-            <p>Please register or login to comment.</p>
-            <a class="ui large green button" href="/login">Login</a>
-            <a class="ui large green button" href="/register">Register</a>
-            <% } else { %>
-            <p>Logged in as: <%= currentUser.username%>.</p>
-            <a class="ui large green button" href="/logout">Logout</a>
-          <% } %>
-          <% if((currentUser && currentUser.isAuthor) || (currentUser && currentUser.isAdmin)) { %>
-            <a class="ui large green button" href="/blog/new">New Post</a>
-          <% } %>
-         </div>
-      </div>
+<div class="ui inverted vertical center aligned segment">
+  <% include ../partials/nav %>
+  <div class="ui header">
+  <h1>Blog</h1>
+  <h2>Welcome to my cluttered mind.</h2>
+  <% if(!currentUser) { %>
+    <p>Please register or login to comment.</p>
+    <a class="ui large green button" href="/login">Login</a>
+    <a class="ui large green button" href="/register">Register</a>
+    <% } else { %>
+    <p>Logged in as: <%= currentUser.username%>.</p>
+    <a class="ui large green button" href="/logout">Logout</a>
+  <% } %>
+  <% if((currentUser && currentUser.isAuthor) || (currentUser && currentUser.isAdmin)) { %>
+    <a class="ui large green button" href="/blog/new">New Post</a>
+  <% } %>
+ </div>
+</div>
       <div class="ui text container segment">
-        <div class="ui list">
+        <div class="ui items">
         <% posts.forEach(function(post) { %>
-          <div class="ui item segment">
-            <div class="ui post-title header">
-              <a href="/blog/<%=post.id%>"><%= post.title %></a>
-            </div>
-              <p>Author: <%= post.author.username%> </p>
-              
-              <div class="ui post-body content">
-                <p><%= post.body %></p>
+          <div class="item segment">
+            <div class="content">
+              <a class="header" href="/blog/<%=post.id%>"><%= post.title %></a>
+              <p class="meta">Author: <%= post.author.username%> </p>
+              <div class="description">
+                <p><%= post.body.substring(0,150) %>...</p>
                 <p><%= post.date%></p>
               </div>
             </div>
-            <% }); %>
           </div>
-        </div>
+        <% }); %>
       </div>
     </div>
+  </div>
+</div>
     
 
 <% include ../partials/footer %>

@@ -9,7 +9,8 @@ express              = require("express"),
 app                  = express();
 
 var indexRoutes = require("./routes/index"),
-blogRoutes = require("./routes/blog");
+blogRoutes = require("./routes/blog"),
+commentRoutes = require("./routes/comment");
 
 var User = require("./models/user");
 //SETTING UP DEPENDENCIES
@@ -42,6 +43,7 @@ app.use(function(req, res, next){
 //ROUTES
 app.use("/", indexRoutes);
 app.use("/blog", blogRoutes);
+app.use("/blog/:post_id/comment", commentRoutes);
 
 
 //START SERVER

@@ -15,14 +15,14 @@ router.get("/register", function(req, res) {
 });
 
 //HANDLE REGISTRATION
-router.post("/register", function(req, res) {
-    var newUser = User({ username: req.body.user.username });
-    User.register(newUser, req.body.user.password, function(err, user) {
+router.post('/register', function(req, res) {
+    var newUser = User({username: req.body.username});
+    User.register(newUser, req.body.password, function(err, user) {
         if(err) {
             console.log(err);
         } else {
             passport.authenticate("local")(req, res, function(){
-                res.redirect("/blog");
+                res.redirect("/");
             });
         }
     });

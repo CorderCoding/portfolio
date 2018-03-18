@@ -1,0 +1,55 @@
+<% include ../partials/header %>
+  <div class="ui inverted vertical center aligned segment">
+    <% include ../partials/nav %>
+    <div class="ui header">
+      <h1>Blog</h1>
+      <h2>Welcome to my cluttered mind.</h2>
+      <% if(!currentUser) { %>
+        <p>Please register or login to comment.</p>
+        <a class="ui large green button" href="/login">Login</a>
+        <a class="ui large green button" href="/register">Register</a>
+        <% } else { %>
+        <p>Logged in as: <%= currentUser.username%>.</p>
+        <a class="ui large green button" href="/logout">Logout</a>
+      <% } %>
+     </div>
+  </div>
+  <div class="ui text container segment">
+    <div>
+      <% if(currentUser && post.author.id.equals(currentUser._id)) { %>
+        <a class="ui large yellow button" href="/blog/edit/<%= post.id %>">Edit</a>
+        <form action="/blog/delete/<%= post.id %>?_method=DELETE" method="POST">
+          <button class="ui large red button">Delete</button>
+        </form>
+      <% } %>
+      </div>
+    <div class="ui post-title header">
+      <%= post.title %>
+    </div>
+    <p>Author: <%= post.author.username%> </p>
+    <div class="ui post-body content">
+      <p><%= post.body %></p>
+      <p><%= post.date%></p>
+      <% if (currentUser) { %>
+        <form class="ui form" action="/blog/<%=post.id%>/comment" method="POST">
+          <textarea name="comment" placeholder="Comment..."></textarea>
+          <button class="ui large green button">Publish Comment</button>
+        </form>
+      <% } %>
+      <div class="ui list">
+        <% post.comments.forEach(function(comment) { %>
+          <p>Comment by: <%=comment.author.username%></p>
+          <p><%=comment.body%></p>
+          <div>
+          <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)) { %>
+            <a class="ui large yellow button" href="/blog/<%= post.id %>/comment/<%=comment.id%>/edit">Edit</a>
+            <form action="/blog/<%= post.id %>/comment/<%=comment.id%>/delete?_method=DELETE" method="POST">
+              <button class="ui large red button">Delete</button>
+            </form>
+          <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+  </div>
+<% include ../partials/footer %>

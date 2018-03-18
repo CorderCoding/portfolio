@@ -1,0 +1,25 @@
+<% include ../partials/header %>
+
+<div class="ui inverted vertical center aligned segment">
+  <% include ../partials/nav %>
+  <div class="ui header">
+  <h1>Editing Post</h1>
+  </div>
+  </div>
+  <div class="ui container">
+    <form id="form" class="ui large form" action="/blog/edit/<%=post.id%>?_method=PUT" method="POST">
+      <div class="field">
+        <label>Title:</label>
+        <input type="text" value="<%= post.title %>" name="post[title]">
+      </div>
+      <div class="field">
+        <label>Body:</label>
+        <textarea name="post[body]"><%= post.body %></textarea>
+      </div>
+      <button class="ui green button">Publish Changes</button>
+        <a class="ui button" href="/blog">Cancel</a>
+    </form>
+  </div>
+</div>
+
+<% include ../partials/footer %>

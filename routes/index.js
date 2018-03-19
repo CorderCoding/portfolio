@@ -58,4 +58,9 @@ router.get("/portfolio", function(req, res) {
     res.render("portfolio");
 });
 
+//DISPLAY CONTACT PAGE
+router.get("/contact", function(req, res) {
+  res.render("contact");
+});
+
 module.exports = router;

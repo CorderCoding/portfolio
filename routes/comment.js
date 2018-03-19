@@ -49,7 +49,7 @@ router.get("/:comment_id/edit", function(req, res) {
           res.render("comment/edit", {post: post, comment: comment});
         }
       });
-    } 
+    }
   });
 });
 

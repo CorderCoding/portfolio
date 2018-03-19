@@ -25,8 +25,7 @@ app.use(expressSanitizer());
 mongoose.connect(process.env.PORTFOLIODBURL);
 
 //AUTH SETUP
-app.use(require('express-session')({ secret: process.env.SESSIONSECRET,
-  resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: process.env.SESSIONSECRET, resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
@@ -35,10 +34,10 @@ passport.deserializeUser(User.deserializeUser());
 
 //GLOBAL USER VARIABLE
 app.use(function(req, res, next){
-   res.locals.currentUser = req.user;
-   res.locals.success = req.flash('success');
-   res.locals.error = req.flash('error');
-   next();
+  res.locals.currentUser = req.user;
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
 });
 
 //ROUTES
@@ -49,9 +48,9 @@ app.use("/blog/:post_id/comment", commentRoutes);
 
 //START SERVER
 app.listen(process.env.PORT, process.env.IP, function() {
-    console.log("========================================");
-    console.log("               PORTFOLIO");
-    console.log("========================================");
-    console.log(Date().toString());
-    console.log("========================================");
+  console.log("========================================");
+  console.log("               PORTFOLIO");
+  console.log("========================================");
+  console.log(Date().toString());
+  console.log("========================================");
 });

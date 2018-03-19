@@ -99,7 +99,7 @@ router.delete("/delete/:post_id", function(req, res) {
           console.log(err);
         } else {
           res.redirect("/blog");
-        } 
+        }
       });
     }
   });

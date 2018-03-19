@@ -3,24 +3,24 @@
 <div class="ui inverted vertical center aligned segment">
 <% include ./partials/nav %>
 <div class="ui header">
-<h1>Register</h1>
-<h2>Register to leave comments on my blog posts.</h2>
+  <h1>Register</h1>
+  <h2>Register to leave comments on my blog posts.</h2>
 </div>
 </div>
 <div class="ui container">
-    <form id="log-form" class="ui large form" action="/register" method="POST">
-        <div class="field">
-            <label>Username:</label>
-            <input type="text" name="username" placeholder="Username"></input>
-        </div>
-        <div class="field">
-            <label>Password:</label>
-            <input type="password" name="password" placeholder="Password"></input>
-        </div>
-        <button class="ui green button">Submit</button>
-        <a class="ui green button" href="/login">Login</a>
-        <a class="ui button" href="/">Go Back</a>
-    </form>
+  <form id="log-form" class="ui large form" action="/register" method="POST">
+    <div class="field">
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Username"></input>
+    </div>
+    <div class="field">
+      <label>Password:</label>
+      <input type="password" name="password" placeholder="Password"></input>
+    </div>
+    <button class="ui green button">Submit</button>
+    <a class="ui green button" href="/login">Login</a>
+    <a class="ui button" href="/">Go Back</a>
+  </form>
 </div>
 
 <% include ./partials/footer %>

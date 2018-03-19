@@ -1,7 +1,16 @@
 var express = require("express"),
 router = express.Router(),
 passport = require("passport"),
+nodemailer = require("nodemailer"),
 User = require("../models/user");
+
+var transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.TRANSPORTERUSER,
+    pass: process.env.TRANSPORTERPASS
+  }
+});
 
 //LANDING PAGE
 router.get("/", function(req, res) {
@@ -61,6 +70,23 @@ router.get("/portfolio", function(req, res) {
 //DISPLAY CONTACT PAGE
 router.get("/contact", function(req, res) {
   res.render("contact");
+});
+
+router.post("/contact", function(req, res) {
+  var message = {
+    priority: "high",
+    to: "aaron@cordercoding.com",
+    subject: req.body.subject,
+    text: "Contact Form Submission From: " + req.body.email + "\r\nFirst Name: " + req.body.firstName + "\r\nLast Name: " + req.body.lastName + "\r\n" + req.body.message
+  }
+  transporter.sendMail(message, function(err, inf){
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect("/contact");
+    }
+  })
+  // transporter.sendMail(message)
 });
 
 module.exports = router;

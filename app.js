@@ -25,7 +25,8 @@ app.use(expressSanitizer());
 mongoose.connect(process.env.PORTFOLIODBURL);
 
 //AUTH SETUP
-app.use(require('express-session')({ secret: 'Th3D0ctor', resave: true, saveUninitialized: true }));
+app.use(require('express-session')({ secret: process.env.SESSIONSECRET,
+  resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));

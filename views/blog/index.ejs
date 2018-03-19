@@ -19,7 +19,7 @@
       </div>
       <div class="ui text container segment">
         <div class="ui items">
-          <% posts.reverse().forEach(function(post) { %>
+          <% posts.forEach(function(post) { %>
             <div class="item segment">
             <div class="content">
             <a class="header" href="/blog/<%=post.id%>"><%- post.title %></a>

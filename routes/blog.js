@@ -44,7 +44,6 @@ router.post("/", function(req, res) {
             //set post author based on user, save and push to users posts array
             post.author.id = req.user._id;
             post.author.username = req.user.username;
-            post.date = new Date();
             post.save();
             user.posts.push(post.id);
             user.save();

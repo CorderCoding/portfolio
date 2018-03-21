@@ -7,10 +7,11 @@ Post = require("../models/post");
 
 //DISPLAY BLOG INDEX
 router.get("/", function(req, res) {
-  Post.find({}, function(err, posts) {
+  Post.find({}).sort({date: "desc"}).exec(function(err, posts) {
     if(err) {
       console.log(err);
     } else {
+      console.log(posts);
       res.render("blog/index", {posts: posts});
     }
   });
@@ -42,7 +43,8 @@ router.post("/", function(req, res) {
           } else {
             //set post author based on user, save and push to users posts array
             post.author.id = req.user._id;
-            post.author.username = req.user.username
+            post.author.username = req.user.username;
+            post.date = new Date();
             post.save();
             user.posts.push(post.id);
             user.save();

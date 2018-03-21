@@ -7,11 +7,10 @@ Post = require("../models/post");
 
 //DISPLAY BLOG INDEX
 router.get("/", function(req, res) {
-  Post.find({}).sort({date: "desc"}).exec(function(err, posts) {
+  Post.find({}).sort({date: -1}).exec(function(err, posts) {
     if(err) {
       console.log(err);
     } else {
-      console.log(posts);
       res.render("blog/index", {posts: posts});
     }
   });

@@ -72,13 +72,16 @@ router.get("/contact", function(req, res) {
   res.render("contact");
 });
 
+//SEND CONTACT FORM MESSAGE TO AARON@CORDERCODING.COM
 router.post("/contact", function(req, res) {
+  //create message based on form input
   var message = {
     priority: "high",
     to: "aaron@cordercoding.com",
     subject: req.body.subject,
     text: "Contact Form Submission From: " + req.body.email + "\r\nFirst Name: " + req.body.firstName + "\r\nLast Name: " + req.body.lastName + "\r\n" + req.body.message
   }
+  //send message using nodemailer
   transporter.sendMail(message, function(err, inf){
     if(err) {
       console.log(err);
@@ -86,7 +89,6 @@ router.post("/contact", function(req, res) {
       res.redirect("/contact");
     }
   })
-  // transporter.sendMail(message)
 });
 
 module.exports = router;

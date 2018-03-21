@@ -1,4 +1,4 @@
-//SETTING UP REQUIREMENTS
+//SETTING UP PACKAGE REQUIREMENTS
 var expressSanitizer = require("express-sanitizer"),
 methodOverride       = require("method-override"),
 LocalStrategy        = require("passport-local"),
@@ -8,12 +8,15 @@ mongoose             = require("mongoose"),
 express              = require("express"),
 app                  = express();
 
+//SETTING UP ROUTE FILES
 var indexRoutes = require("./routes/index"),
 blogRoutes = require("./routes/blog"),
 commentRoutes = require("./routes/comment");
 
+//SETUP USER MODEL USER FOR AUTHENTICATION
 var User = require("./models/user");
-//SETTING UP DEPENDENCIES
+
+//SETTING UP EXPRESS DEPENDENCIES
 app.use(flash());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));

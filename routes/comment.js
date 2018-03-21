@@ -6,24 +6,31 @@ Comment = require("../models/comment");
 
 //ADD COMMENT
 router.post("/", function(req, res) {
+  //if logged in, find user in DB
   User.findById(req.user.id, function(err, user) {
     if(err) {
       console.log(err);
     } else {
+      //find post in DB
       Post.findById(req.params.post_id, function(err, post) {
         if(err) {
           console.log(err);
         } else {
+          //sanitize comment of any <script>s
           var sanitized = req.sanitize(req.body.comment);
+          //create sanitized comment
           Comment.create({body: sanitized}, function(err, comment) {
             if(err) {
               console.log(err);
             } else {
+              //add author information based on user
               comment.author.id = req.user.id;
               comment.author.username = req.user.username;
               comment.save();
+              //push comment to posts comments array
               post.comments.push(comment.id);
               post.save();
+              //push comment to users comments array
               user.comments.push(comment.id);
               user.save();
               res.redirect("/blog/" + req.params.post_id);

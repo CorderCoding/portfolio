@@ -17,7 +17,7 @@
     <div class="ui text container segment">
       <div>
         <% if(currentUser && post.author.id.equals(currentUser._id) || (currentUser && currentUser.isAdmin)) { %>
-          <form action="/blog/delete/<%= post.id %>?_method=DELETE" method="POST">
+          <form action="/blog/delete/<%= post.id %>?_method=DELETE" method="POST" onsubmit="return confirm('Do you really want to delete this post?');">
           <a class="ui small yellow button" href="/blog/edit/<%= post.id %>">Edit Post</a>
           <button class="ui small red button">Delete Post</button>
           </form>
@@ -30,6 +30,14 @@
         <p class="text wrap"><%- post.body %></p>
         <div class="ui divider"></div>
         <p><%= post.date%></p>
+        <% if(!currentUser) { %>
+          <p>Please register or login to comment.</p>
+          <a class="ui large green button" href="/login">Login</a>
+          <a class="ui large green button" href="/register">Register</a>
+          <% } else { %>
+            <p>Logged in as: <%= currentUser.username%>.</p>
+            <a class="ui large green button" href="/logout">Logout</a>
+          <% } %>
         <% if (currentUser) { %>
           <h2>Comments:</h2>
           <form class="ui form" action="/blog/<%=post.id%>/comment" method="POST">
@@ -51,7 +59,7 @@
               </div>
 
               <% if((currentUser && comment.author.id.equals(currentUser._id)) || (currentUser && currentUser.isAdmin)) { %>
-                <form action="/blog/<%= post.id %>/comment/<%=comment.id%>/delete?_method=DELETE" method="POST">
+                <form action="/blog/<%= post.id %>/comment/<%=comment.id%>/delete?_method=DELETE" method="POST" onsubmit="return confirm('Do you really want to delete this comment?');">
                 <a class="ui small yellow button" href="/blog/<%= post.id %>/comment/<%=comment.id%>/edit">Edit Comment</a>
                 <button class="ui small red button">Delete Comment</button>
                 </form>

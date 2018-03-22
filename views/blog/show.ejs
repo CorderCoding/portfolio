@@ -32,22 +32,26 @@
         <p><%= post.date%></p>
         <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="@CorderCoding" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <a href="https://twitter.com/cordercoding?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @cordercoding</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        <% if(!currentUser) { %>
-          <p>Please register or login to comment.</p>
-          <a class="ui large green button" href="/login">Login</a>
-          <a class="ui large green button" href="/register">Register</a>
-          <% } else { %>
-            <p>Logged in as: <%= currentUser.username%>.</p>
-            <a class="ui large green button" href="/logout">Logout</a>
+        <div>
+          <% if(!currentUser) { %>
+            <a class="ui large green button" href="/login">Login</a>
+            <a class="ui large green button" href="/register">Register</a>
+            <p>Please register or login to comment.</p>
+            <% } else { %>
+              <p>Logged in as: <%= currentUser.username%>.</p>
+              <a class="ui large green button" href="/logout">Logout</a>
           <% } %>
-        <% if (currentUser) { %>
+        </div>
           <h2>Comments:</h2>
           <form class="ui form" action="/blog/<%=post.id%>/comment" method="POST">
-          <textarea name="comment" placeholder="Comment..."></textarea>
+          <% if (!currentUser) { %>
+            <textarea name="comment" placeholder="Comment..." disabled></textarea>
+          <% } else { %>
+            <textarea name="comment" placeholder="Comment..."></textarea>
+          <% } %>
           <div class="ui divider"></div>
           <button class="ui small green button">Publish Comment</button>
           </form>
-          <% } %>
           <div class="ui comments">
             <% post.comments.forEach(function(comment) { %>
               <div class="comment">

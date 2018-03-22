@@ -1,8 +1,17 @@
 var express = require("express"),
 router = express.Router({mergeParams: true}),
+nodemailer = require("nodemailer"),
 Post = require("../models/post"),
 User = require("../models/user"),
 Comment = require("../models/comment");
+
+var transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.TRANSPORTERUSER,
+    pass: process.env.TRANSPORTERPASS
+  }
+});
 
 //ADD COMMENT
 router.post("/", function(req, res) {
@@ -33,6 +42,18 @@ router.post("/", function(req, res) {
               //push comment to users comments array
               user.comments.push(comment.id);
               user.save();
+              var message = {
+                priority: "high",
+                to: "aaron@cordercoding.com",
+                text: req.user.username + " has commented on your post. Here is what they said:\r\n" + req.body.comment + "\r\nClick below to visit the post.\r\nhttps://cordercoding.com/blog/" + req.params.post_id
+              }
+              transporter.sendMail(message, function(err, inf) {
+                if(err) {
+                  console.log(err);
+                } else {
+                  res.redirect("back");
+                }
+              });
               res.redirect("/blog/" + req.params.post_id);
             }
           });

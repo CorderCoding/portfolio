@@ -45,7 +45,7 @@ router.post("/", function(req, res) {
               var message = {
                 priority: "high",
                 to: "aaron@cordercoding.com",
-                text: req.user.username + " has commented on your post. Here is what they said:\r\n" + req.body.comment + "\r\nClick below to visit the post.\r\nhttps://cordercoding.com/blog/" + req.params.post_id
+                text: req.user.username + " has commented on your post. Here is what they said:\r\n\r\n" + req.body.comment + "\r\n\r\nClick below to visit the post.\r\n\r\nhttps://cordercoding.com/blog/" + req.params.post_id
               }
               transporter.sendMail(message, function(err, inf) {
                 if(err) {

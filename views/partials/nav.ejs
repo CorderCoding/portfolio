@@ -6,6 +6,9 @@
       <a class="ui button green" href="/portfolio">Portfolio</a>
       <a class="ui button green" href="/blog">Blog</a>
       <a class="ui button green" href="/contact">Contact</a>
+      <% if(currentUser) { %>
+        <a class="ui button green" href="/user/<%= currentUser.username %>">Logged in as: <%=currentUser.username%> </a>
+      <% } %>
     </div>
   </div>
 </div>

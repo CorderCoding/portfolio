@@ -30,6 +30,8 @@
         <p class="text wrap"><%- post.body %></p>
         <div class="ui divider"></div>
         <p><%= post.date%></p>
+        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-via="@CorderCoding" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        <a href="https://twitter.com/cordercoding?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @cordercoding</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <% if(!currentUser) { %>
           <p>Please register or login to comment.</p>
           <a class="ui large green button" href="/login">Login</a>

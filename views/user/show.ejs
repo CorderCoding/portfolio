@@ -7,9 +7,8 @@
     <h2>This is where you can change your settings!</h2>
   </div>
 </div>
-<div id="account-items" class="ui grid">
-  <div class="row">
-    <form id="account-form" class="ui six wide column form" action="/user/<%= user._id %>?_method=PUT" method="POST">
+<div id="account-items">
+    <form id="account-form" class="ui form" action="/user/<%= user._id %>?_method=PUT" method="POST">
       <div class="field">
         <label>Display Name:</label>
         <input type="text" name="user[name]" value="<%= user.name %>">
@@ -43,7 +42,7 @@
       </div>
       <button class="ui green button">Save Changes</button>
     </form>
-    <form id="password-form" class="ui six wide column form" action="/user/<%= user._id %>/pass?_method=PUT" method="POST">
+    <form id="password-form" class="ui form" action="/user/<%= user._id %>/pass?_method=PUT" method="POST">
       <div class="field">
         <label>Current Password:</label>
         <input type="password" name="curPassword" required>
@@ -58,9 +57,7 @@
       </div>
       <button class="ui green button">Save New Password</button>
     </form>
-  </div>
-  <div class="row">
-    <div class="ui six wide column text container segment">
+    <div class="ui container segment">
       <div class="ui text centered header"><h1>My Posts</h1></div>
       <div class="ui divider"></div>
       <div class="ui items">
@@ -78,7 +75,9 @@
           <% }); %>
         </div>
       </div>
-      <div class="ui six wide column text container segment">
+    </div>
+  </div>
+      <div class="ui container segment">
         <div class="ui text centered header"><h1>My Comments</h1></div>
         <div class="ui divider"></div>
         <div class="ui items">
@@ -96,6 +95,5 @@
             <% }); %>
           </div>
         </div>
-      </div>
 </div>
 <% include ../partials/footer %>

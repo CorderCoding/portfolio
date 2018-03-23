@@ -1,17 +1,22 @@
 <div id="nav" class="ui container">
   <div class="ui large inverted green stackable menu">
     <a class="green item" href="/"><span class="black-char">&lt</span>Corder<span class="black-char">|</span>Coding<span class="black-char">&gt</span></a>
-    <a class="ui green item" href="/about">About</a>
-    <a class="ui green item" href="/portfolio">Portfolio</a>
-    <a class="ui green item" href="/blog">Blog</a>
-    <a class="ui green item" href="/contact">Contact</a>
-    <div class="right stackable menu">
+    <div class="ui simple dropdown">
+      <div class="ui item">Menu <i class="dropdown icon"></i></div>
+      <div class="menu">
+        <a class="ui item" href="/about">About</a>
+        <a class="ui item" href="/portfolio">Portfolio</a>
+        <a class="ui item" href="/blog">Blog</a>
+        <a class="ui item" href="/contact">Contact</a>
+      </div>
+    </div>
+    <div class="right menu">
       <% if(currentUser) { %>
-        <a class="ui green item" href="/user/<%= currentUser._id %>">Logged in as: <%=currentUser.username%> </a>
-        <a class="ui green item" href="/logout">Logout</a>
+        <a class="ui item" href="/user/<%= currentUser._id %>">Logged in as: <%=currentUser.username%> </a>
+        <a class="ui item" href="/logout">Logout</a>
       <% } else { %>
-        <a class="ui green item" href="/login">Login</a>
-        <a class="ui green item" href="/register">Register</a>
+        <a class="ui item" href="/login">Login</a>
+        <a class="ui item" href="/register">Register</a>
       <% } %>
     </div>
   </div>

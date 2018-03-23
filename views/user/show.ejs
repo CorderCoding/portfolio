@@ -8,20 +8,16 @@
   </div>
 </div>
 <div id="account-items" class="ui grid">
-  <form id="account-form" class="ui six wide column form" action="/user/<%= user.username %>?_method=PUT" method="POST">
+  <form id="account-form" class="ui six wide column form" action="/user/<%= user._id %>?_method=PUT" method="POST">
     <div class="field">
-      <label>Name:</label>
-      <input type="text" name="user[displayName]" value="<%= user.name %>">
-    </div>
-    <div class="field">
-      <label>Username:</label>
-      <input type="text" name="user[username]" value=<%= user.username %>>
+      <label>Display Name:</label>
+      <input type="text" name="user[name]" value="<%= user.name %>">
     </div>
     <div class="field">
       <label>Email:</label>
       <input type="text" name="user[email]" value=<%= user.email %>>
     </div>
-    <div class="inline fields">
+    <div class="field">
       <label for="recvEmails">Receive Emails?:</label>
       <div class="field">
         <div class="ui radio checkbox">
@@ -46,7 +42,7 @@
     </div>
     <button class="ui green button">Save Changes</button>
   </form>
-  <form id="password-form" class="ui six wide column form" action="/user/<%= user.username %>/pass?_method=PUT" method="POST">
+  <form id="password-form" class="ui six wide column form" action="/user/<%= user._id %>/pass?_method=PUT" method="POST">
     <div class="field">
       <label>Current Password:</label>
       <input type="password" name="curPassword" required>

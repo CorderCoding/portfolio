@@ -34,7 +34,11 @@ router.post("/", function(req, res) {
             } else {
               //add author information based on user
               comment.author.id = req.user.id;
-              comment.author.username = req.user.username;
+              if(!user.name) {
+                comment.author.username = req.user.username;
+              } else {
+                comment.author.username = user.name;
+              }
               comment.save();
               //push comment to posts comments array
               post.comments.push(comment.id);

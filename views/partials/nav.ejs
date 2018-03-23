@@ -7,7 +7,7 @@
     <a class="ui green item" href="/contact">Contact</a>
     <div class="right stackable menu">
       <% if(currentUser) { %>
-        <a class="ui green item" href="/user/<%= currentUser.username %>">Logged in as: <%=currentUser.username%> </a>
+        <a class="ui green item" href="/user/<%= currentUser._id %>">Logged in as: <%=currentUser.username%> </a>
         <a class="ui green item" href="/logout">Logout</a>
       <% } else { %>
         <a class="ui green item" href="/login">Login</a>

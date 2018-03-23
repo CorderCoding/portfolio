@@ -10,8 +10,9 @@ app                  = express();
 
 //SETTING UP ROUTE FILES
 var indexRoutes = require("./routes/index"),
-blogRoutes = require("./routes/blog"),
-commentRoutes = require("./routes/comment");
+userRoutes      = require("./routes/user"),
+blogRoutes      = require("./routes/blog"),
+commentRoutes   = require("./routes/comment");
 
 //SETUP USER MODEL USER FOR AUTHENTICATION
 var User = require("./models/user");
@@ -45,6 +46,7 @@ app.use(function(req, res, next){
 
 //ROUTES
 app.use("/", indexRoutes);
+app.use("/user", userRoutes);
 app.use("/blog", blogRoutes);
 app.use("/blog/:post_id/comment", commentRoutes);
 

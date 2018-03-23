@@ -57,6 +57,16 @@ h1 {
   margin: 2.5% auto;
 }
 
+#account-items {
+  margin: 2.5% auto;
+}
+
+#account-form {
+  max-width: 70%;
+  margin: 5% auto;
+  font-size: 24px;
+}
+
 .ui.link.cards {
   max-width: 60%;
   margin: 0 auto;

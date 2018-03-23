@@ -5,8 +5,9 @@ Schema = mongoose.Schema;
 var userSchema = new Schema({
     username: String,
     password: String,
-    firstName: String,
-    lastName: String,
+    displayName: {type: String, default: ""},
+    email: {type: String, default: ""},
+    recvEmails: {type: Boolean, default: false},
     isAuthor: {type: Boolean, default: false},
     isAdmin: {type: Boolean, default: false},
     posts: [{type: mongoose.Schema.Types.ObjectId, ref: "Post"}],

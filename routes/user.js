@@ -5,7 +5,7 @@ passport = require("passport"),
 User = require("../models/user");
 
 router.get("/:user_id", function(req, res) {
-  User.findById(req.params.user_id, function(err, user) {
+  User.findById(req.params.user_id).populate("posts comments").exec(function(err, user) {
     if(err) {
       console.log(err);
     } else {

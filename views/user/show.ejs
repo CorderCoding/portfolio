@@ -8,54 +8,94 @@
   </div>
 </div>
 <div id="account-items" class="ui grid">
-  <form id="account-form" class="ui six wide column form" action="/user/<%= user._id %>?_method=PUT" method="POST">
-    <div class="field">
-      <label>Display Name:</label>
-      <input type="text" name="user[name]" value="<%= user.name %>">
-    </div>
-    <div class="field">
-      <label>Email:</label>
-      <input type="text" name="user[email]" value=<%= user.email %>>
-    </div>
-    <div class="field">
-      <label for="recvEmails">Receive Emails?:</label>
+  <div class="row">
+    <form id="account-form" class="ui six wide column form" action="/user/<%= user._id %>?_method=PUT" method="POST">
       <div class="field">
-        <div class="ui radio checkbox">
-          <% if(user.recvEmails) { %>
-            <input type="radio" name="user[recvEmails]" value=true checked="checked">
-          <% } else { %>
-            <input type="radio" name="user[recvEmails]" value=true>
-          <% } %>
-          <label>Yes, please!</label>
-        </div>
+        <label>Display Name:</label>
+        <input type="text" name="user[name]" value="<%= user.name %>">
       </div>
       <div class="field">
-        <div class="ui radio checkbox">
-          <% if(!user.recvEmails) { %>
-            <input type="radio" name="user[recvEmails]" value=false checked="checked">
-          <% } else { %>
-            <input type="radio" name="user[recvEmails]" value=false>
-          <% } %>
-          <label>No way!</label>
+        <label>Email:</label>
+        <input type="text" name="user[email]" value=<%= user.email %>>
+      </div>
+      <div class="field">
+        <label for="recvEmails">Receive Emails?:</label>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <% if(user.recvEmails) { %>
+              <input type="radio" name="user[recvEmails]" value=true checked="checked">
+            <% } else { %>
+              <input type="radio" name="user[recvEmails]" value=true>
+            <% } %>
+            <label>Yes, please!</label>
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui radio checkbox">
+            <% if(!user.recvEmails) { %>
+              <input type="radio" name="user[recvEmails]" value=false checked="checked">
+            <% } else { %>
+              <input type="radio" name="user[recvEmails]" value=false>
+            <% } %>
+            <label>No way!</label>
+          </div>
         </div>
       </div>
-    </div>
-    <button class="ui green button">Save Changes</button>
-  </form>
-  <form id="password-form" class="ui six wide column form" action="/user/<%= user._id %>/pass?_method=PUT" method="POST">
-    <div class="field">
-      <label>Current Password:</label>
-      <input type="password" name="curPassword" required>
-    </div>
-    <div class="field">
-      <label>New Password:</label>
-      <input type="password" name="newPassword" required>
-    </div>
-    <div class="field">
-      <label>Confirm New Password:</label>
-      <input type="password" name="confNewPass" required>
-    </div>
-    <button class="ui green button">Save New Password</button>
-  </form>
+      <button class="ui green button">Save Changes</button>
+    </form>
+    <form id="password-form" class="ui six wide column form" action="/user/<%= user._id %>/pass?_method=PUT" method="POST">
+      <div class="field">
+        <label>Current Password:</label>
+        <input type="password" name="curPassword" required>
+      </div>
+      <div class="field">
+        <label>New Password:</label>
+        <input type="password" name="newPassword" required>
+      </div>
+      <div class="field">
+        <label>Confirm New Password:</label>
+        <input type="password" name="confNewPass" required>
+      </div>
+      <button class="ui green button">Save New Password</button>
+    </form>
+  </div>
+  <div class="row">
+    <div class="ui six wide column text container segment">
+      <div class="ui text centered header"><h1>My Posts</h1></div>
+      <div class="ui divider"></div>
+      <div class="ui items">
+        <% user.posts.forEach(function(post) { %>
+          <div class="item segment">
+          <div class="content">
+          <a class="header" href="/blog/<%=post.id%>"><%- post.title %></a>
+          <div class="description">
+          <p class="text wrap"><%- post.body.substring(0,150) %>...</p>
+          <p><%= post.date %></p>
+          </div>
+          <div class="ui divider"></div>
+          </div>
+          </div>
+          <% }); %>
+        </div>
+      </div>
+      <div class="ui six wide column text container segment">
+        <div class="ui text centered header"><h1>My Comments</h1></div>
+        <div class="ui divider"></div>
+        <div class="ui items">
+          <% user.comments.forEach(function(comment) { %>
+            <div class="item segment">
+            <div class="content">
+            <a class="header" href="/blog/<%=comment.post.id%>"><%- comment.post.title %></a>
+            <div class="description">
+            <p class="text wrap"><%- comment.body.substring(0,150) %>...</p>
+            <p><%= comment.date %></p>
+            </div>
+            <div class="ui divider"></div>
+            </div>
+            </div>
+            <% }); %>
+          </div>
+        </div>
+      </div>
 </div>
 <% include ../partials/footer %>

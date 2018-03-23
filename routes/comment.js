@@ -39,6 +39,8 @@ router.post("/", function(req, res) {
               } else {
                 comment.author.username = user.name;
               }
+              comment.post.id = post.id;
+              comment.post.title = post.title;
               comment.save();
               //push comment to posts comments array
               post.comments.push(comment.id);

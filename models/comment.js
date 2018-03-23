@@ -7,6 +7,10 @@ var commentSchema = new Schema({
     	id: {type: mongoose.Schema.Types.ObjectId, ref: "User"},
     	username: String,
     },
+    post: {
+      id: {type:mongoose.Schema.Types.ObjectId, ref: "Post"},
+      title: String,
+    },
     date: {type: Date, default: Date.now}
 });
 

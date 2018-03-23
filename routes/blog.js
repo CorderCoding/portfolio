@@ -50,7 +50,7 @@ router.post("/", function(req, res) {
             post.save();
             user.posts.push(post.id);
             user.save();
-            res.redirect("/blog");
+            res.redirect("/blog/" + post.id);
           }
         });
       }

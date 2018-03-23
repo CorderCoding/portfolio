@@ -22,7 +22,7 @@ router.put("/:username", function(req, res) {
     if(err) {
       console.log(err);
     } else {
-      res.redirect("/user/" + req.params.username);
+      res.redirect("/user/" + req.body.user.username);
     }
   });
 });

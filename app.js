@@ -21,6 +21,7 @@ var User = require("./models/user");
 app.use(flash());
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use("/public", express.static("public"));
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(expressSanitizer());

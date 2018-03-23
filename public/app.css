@@ -1,4 +1,4 @@
-/* .site {
+.site {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
@@ -6,7 +6,7 @@
 
 .site-content {
   flex: 1;
-} */
+}
 
 #nav {
   margin-top: 15px;
@@ -41,6 +41,11 @@ h1 {
   margin: 50px 0;
 }
 
+#portfolio-items {
+  margin: 2.5% auto;
+  width: 75%;
+}
+
 #log-form {
   max-width: 30%;
   margin: 10% auto 15% auto;
@@ -71,11 +76,6 @@ h1 {
   max-width: 70%;
   margin: 5% auto;
   font-size: 24px;
-}
-
-.ui.link.cards {
-  max-width: 60%;
-  margin: 0 auto;
 }
 
 .wrap {

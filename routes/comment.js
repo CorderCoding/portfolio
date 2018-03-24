@@ -16,55 +16,100 @@ var transporter = nodemailer.createTransport({
 //ADD COMMENT
 router.post("/", function(req, res) {
   //if logged in, find user in DB
-  User.findById(req.user.id, function(err, user) {
+  var sanitized = req.sanitize(req.body.comment);
+  Comment.create({body: sanitized}, function(err, comment){
+    Post.findById(req.params.post_id, function(err, post) {
+      if(err) {
+        console.log(err);
+      } else {
+        comment.post.id = post.id;
+        comment.post.title = post.title;
+        comment.save();
+        post.comments.push(comment.id);
+        post.save();
+      }
+    });
+    User.findById(req.user.id, function(err, user) {
+      if(err) {
+        console.log(err);
+      } else {
+        comment.author.id = user.id;
+        if(!user.name) {
+          comment.author.username = req.user.username;
+        } else {
+          comment.author.username = req.user.name;
+        }
+        comment.save();
+        user.comments.push(comment.id);
+        user.save();
+      }
+    });
+  });
+  Post.findById(req.params.post_id, function(err, post) {
     if(err) {
       console.log(err);
     } else {
-      //find post in DB
-      Post.findById(req.params.post_id, function(err, post) {
+      var sent = [];
+      User.findById(post.author.id, function(err, user) {
         if(err) {
           console.log(err);
         } else {
-          //sanitize comment of any <script>s
-          var sanitized = req.sanitize(req.body.comment);
-          //create sanitized comment
-          Comment.create({body: sanitized}, function(err, comment) {
-            if(err) {
-              console.log(err);
+          if(post.author.id != req.user.id) {
+            sent.push(user.email);
+            if(req.user.name) {
+              name = req.user.name;
             } else {
-              //add author information based on user
-              comment.author.id = req.user.id;
-              if(!user.name) {
-                comment.author.username = req.user.username;
-              } else {
-                comment.author.username = user.name;
-              }
-              comment.post.id = post.id;
-              comment.post.title = post.title;
-              comment.save();
-              //push comment to posts comments array
-              post.comments.push(comment.id);
-              post.save();
-              //push comment to users comments array
-              user.comments.push(comment.id);
-              user.save();
-              var message = {
-                priority: "high",
-                to: "aaron@cordercoding.com",
-                text: req.user.username + " has commented on your post. Here is what they said:\r\n\r\n" + req.body.comment + "\r\n\r\nClick below to visit the post.\r\n\r\nhttps://cordercoding.com/blog/" + req.params.post_id
-              }
-              transporter.sendMail(message, function(err, inf) {
-                if(err) {
-                  console.log(err);
-                } else {
-                  res.redirect("back");
-                }
-              });
-              res.redirect("/blog/" + req.params.post_id);
+              name = req.user.username;
             }
-          });
+            var message = {
+              priority: "high",
+              to: user.email,
+              subject: "New Comment Added to Post",
+              text: name + " has commented on your post. Here is what they said:\r\n\r\n" + req.body.comment + "\r\n\r\nClick below to visit the post.\r\n\r\nhttps://cordercoding.com/blog/" + req.params.post_id
+            }
+            transporter.sendMail(message, function(err, inf) {
+              if(err) {
+                console.log(err);
+              }
+              res.redirect("back");
+            });
+          }
         }
       });
+      for(var i = 0; i < post.comments.length; i++) {
+        Comment.findById(post.comments[i], function(err, comment) {
+          if(err) {
+            console.log(err);
+          } else {
+            User.findById(comment.author.id, function(err, user) {
+              if(err) {
+                console.log(err);
+              } else {
+                if(user.email && user.recvEmails && sent.indexOf(user.email) === -1 && user._id != req.user.id) {
+                  sent.push(user.email);
+                  if(req.user.name) {
+                    name = req.user.name;
+                  } else {
+                    name = req.user.username;
+                  }
+                  var message = {
+                    priority: "high",
+                    to: user.email,
+                    subject: "New Comment Added to Post",
+                    text: name + " has commented on a post you commented on. Here is what they said:\r\n\r\n" + req.body.comment + "\r\n\r\nClick below to visit the post.\r\n\r\nhttps://cordercoding.com/blog/" + req.params.post_id
+                  }
+                  transporter.sendMail(message, function(err, inf) {
+                    if(err) {
+                      console.log(err);
+                    }
+                    res.redirect("back");
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
     }
   });
 });
@@ -75,7 +120,6 @@ router.get("/:comment_id/edit", function(req, res) {
     if(err) {
       console.log(err);
     } else {
-      console.log(post);
       Comment.findById(req.params.comment_id, function(err, comment) {
         if(err) {
           console.log(err);

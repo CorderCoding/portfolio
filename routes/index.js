@@ -78,8 +78,8 @@ router.post("/contact", function(req, res) {
   var message = {
     priority: "high",
     to: "aaron@cordercoding.com",
-    subject: req.body.subject,
-    text: "Contact Form Submission From: " + req.body.email + "\r\nFirst Name: " + req.body.firstName + "\r\nLast Name: " + req.body.lastName + "\r\n" + req.body.message
+    subject: "Contact Form Submission:" + req.body.subject,
+    text: "From: " + req.body.email + "\r\nFirst Name: " + req.body.firstName + "\r\nLast Name: " + req.body.lastName + "\r\n" + req.body.message
   }
   //send message using nodemailer
   transporter.sendMail(message, function(err, inf){

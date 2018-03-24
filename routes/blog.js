@@ -108,7 +108,12 @@ router.delete("/delete/:post_id", function(req, res) {
           if(err) {
             console.log(err);
           }
-        })
+        });
+        Comment.findByIdAndRemove(comment.id, function(err) {
+          if(err) {
+            console.log(err);
+          }
+        });
       });
       //find author of post and remove post from posts array
       User.findByIdAndUpdate(post.author.id, {$pull:{"posts": req.params.post_id}}, function(err, user) {

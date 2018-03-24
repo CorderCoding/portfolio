@@ -54,7 +54,7 @@ router.post("/", function(req, res) {
         if(err) {
           console.log(err);
         } else {
-          if(post.author.id != req.user.id) {
+          if(!user._id.equals(req.user.id)) {
             sent.push(user.email);
             if(req.user.name) {
               name = req.user.name;
@@ -85,7 +85,7 @@ router.post("/", function(req, res) {
               if(err) {
                 console.log(err);
               } else {
-                if(user.email && user.recvEmails && sent.indexOf(user.email) === -1 && user._id != req.user.id) {
+                if(user.email && user.recvEmails && sent.indexOf(user.email) === -1 && !user._id.equals(req.user.id)) {
                   sent.push(user.email);
                   if(req.user.name) {
                     name = req.user.name;
